@@ -3,24 +3,27 @@ import PropTypes from "prop-types";
 
 
 
-function MovieList({movies}) {
+function MovieList({movies, onSelectMovie}) {
     MovieList.propTypes = {
         movies: PropTypes.arrayOf(PropTypes.object),
+        onSelectMovie : PropTypes.func,
     }
     return (
-        <ul className="list">
+        <ul className="list list-movies">
             {movies?.map((movie) => (
-                <Movie movie={movie} key={movie.imdbID} />
+                <Movie movie={movie} key={movie.imdbID} onSelectMovie={onSelectMovie}/>
             ))}
             </ul>
     );
 }
-function Movie({ movie }) {
+function Movie({ movie, onSelectMovie }) {
     Movie.propTypes = {
         movie: PropTypes.object,
+        onSelectMovie : PropTypes.func,
     }
+
     return (
-        <li>
+        <li onClick={()=> onSelectMovie(movie.imdbID)}>
                     <img src={movie.Poster} alt={`${movie.Title} poster`} />
                     <h3>{movie.Title}</h3>
                     <div>

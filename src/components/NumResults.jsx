@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function NumResults({ movies }) {
     NumResults.propTypes = {
-        movies: PropTypes.arrayOf(PropTypes.object).isRequired, 
+        movies: PropTypes.arrayOf(PropTypes.object), 
     }
     
     return (

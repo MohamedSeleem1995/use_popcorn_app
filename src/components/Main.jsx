@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function Main({children}) {
     Main.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
 }
     return (
         <main className="main">

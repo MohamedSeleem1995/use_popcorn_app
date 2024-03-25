@@ -1,26 +1,28 @@
-import PropTypes from "prop-types";
+import PropTypes, { string } from "prop-types";
 
-function WatchedList({ watched }) {
+function WatchedList({ watched, onDeleteWatched }) {
     WatchedList.propTypes = {
-        watched: PropTypes.arrayOf(PropTypes.object).isRequired,
+        watched: PropTypes.arrayOf(PropTypes.object, string),
+        onDeleteWatched: PropTypes.func,
     }
     return (
         <ul className="list">
                 {watched.map((movie) => (
-                <WatchedMovie movie={movie} key={movie.imdbID} />
+                    <WatchedMovie movie={movie} key={movie.imdbID} onDeleteWatched={onDeleteWatched } />
             ))}
             </ul>
     );
 }
 
-function WatchedMovie({ movie }) {
+function WatchedMovie({ movie, onDeleteWatched }) {
     WatchedMovie.propTypes = {
-        movie :PropTypes.object.isRequired,
+        movie: PropTypes.object,
+        onDeleteWatched : PropTypes.func,
     }
     return (
         <li>
-                <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                <h3>{movie.Title}</h3>
+                <img src={movie.poster} alt={`${movie.title} poster`} />
+                <h3>{movie.title}</h3>
                 <div>
                     <p>
                         <span>⭐️</span>
@@ -34,6 +36,7 @@ function WatchedMovie({ movie }) {
                         <span>⏳</span>
                         <span>{movie.runtime} min</span>
                     </p>
+                    <button className="btn-delete" onClick={() => onDeleteWatched(movie.imdbID)}>X</button>
                 </div>
             </li>
     );
